@@ -1,0 +1,61 @@
+HTTP/0.9 — The One-line Protocol
+Initial version of HTTP — a simple client-server, request-response, telenet-friendly protocol
+Request nature: single-line (method + path for requested document)
+Methods supported: GET only
+Response type: hypertext only
+Connection nature: terminated immediately after the response
+No HTTP headers (cannot transfer other content type files), No status/error codes, No URLs, No versioning
+
+
+HTTP/1.0 — Building extensibility
+Browser-friendly protocol
+Provided header fields including rich metadata about both request and response (HTTP version number, status code, content type)
+Response: not limited to hypertext (Content-Type header provided ability to transmit files other than plain HTML files — e.g. scripts, stylesheets, media)
+Methods supported: GET , HEAD , POST
+Connection nature: terminated immediately after the response
+
+
+Both HTTP/0.9 and HTTP/1.0 required to open up a new connection for each request (and close it immediately 
+after the response was sent). Each time a new connection establishes, a TCP three-way handshake should also occur. 
+For better performance, it was crucial to reduce these round-trips between client and server. HTTP/1.1 solved this with
+ persistent connections.
+
+
+HTTP/1.1 — The standardized protocol
+This is the HTTP version currently in common use.
+Introduced critical performance optimizations and feature enhancements — persistent and pipelined connections, chunked transfers, compression/decompression, content negotiations, virtual hosting (a server with a single IP Address hosting multiple domains), faster response and great bandwidth savings by adding cache support.
+Methods supported: GET , HEAD , POST , PUT , DELETE , TRACE , OPTIONS
+Connection nature: long-lived
+
+
+The Keep-Alive header was used prior to HTTP/1.1 and was obsoleted by HTTP/1.1 making persistent connections the default behavior.
+ Keep-Alive header can be used to define policies for long-lived communication between hosts (i.e. allows a connection to stay 
+active until an event occurs). This laid foundation for persistence,
+ reusable connections, pipelining, and many more enhanced capabilities in modern web communication protocols.
+
+HTTP pipelining, multiple connections, and many more improvements have been implemented,
+ thanks to the Keep-Alive header’s behavior.
+
+
+
+With Upgrade header introduced in HTTP/1.1, it is possible to start a connection using a commonly-used protocol, such as HTTP/1.1, then request that the connection switch to an enhanced protocol type like HTTP/2.0
+ or WebSockets.
+
+http/2
+In HTTP/2, the binary framing layer encodes requests/responses and cuts them up into smaller 
+packets of information, greatly increasing the flexibility of data transfer.
+
+
+
+Protocol negotiation mechanism — protocol electing, eg. HTTP/1.1, HTTP/2 or other.
+High-level compatibility with HTTP/1.1 — methods, status codes, URIs and header fields.
+Page load speed improvements trough:
+Compression of request headers
+Binary protocol
+HTTP/2 Server Push
+Request multiplexing over a single TCP connection
+Request pipelining
+HOL blocking (Head-of-line) — Package blocking
+Request multiplexing
+HTTP/2 can send multiple requests for data in parallel over a single TCP connection. This is the most advanced feature of the HTTP/2 protocol because it allows you to 
+download web files asynchronously from one server. Most modern browsers limit TCP connections to one server.
